@@ -6,6 +6,20 @@
   <title>Anil Wasantha Tours & Transfers | Private Driver Sri Lanka</title>
   <meta name="description" content="Private driver service in Sri Lanka by Anil Wasantha. Airport pickups, tourist trips, and private hires across Sri Lanka. Prices from LKR 100 per km." />
   <meta name="theme-color" content="#0f172a" />
+
+  <!-- Leaflet map picker (OpenStreetMap) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
   <style>
     :root{
       --bg:#0b1220;
@@ -71,6 +85,7 @@
       background:linear-gradient(135deg,#0f172a,#1e293b 55%, #334155);
       box-shadow:0 8px 18px rgba(15,23,42,.18);
       font-weight:700;
+      flex-shrink:0;
     }
     .brand small{
       display:block;
@@ -109,7 +124,7 @@
       color:#fff;
       background:
         linear-gradient(180deg, rgba(2,6,23,.62), rgba(2,6,23,.76)),
-        url('https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+        url('https://commons.wikimedia.org/wiki/Special:FilePath/Colombo%20skyline%202024.jpg') center/cover no-repeat;
     }
     .hero::after{
       content:"";
@@ -165,6 +180,9 @@
       font-weight:700;
       transition:.2s ease;
       border:1px solid transparent;
+      cursor:pointer;
+      font:inherit;
+      text-decoration:none;
     }
     .btn-primary{
       background:var(--primary);
@@ -232,6 +250,21 @@
       margin-top:.55rem;
     }
 
+    /* Vehicle badge */
+    .vehicle-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      background:#eff6ff;
+      border:1px solid #bfdbfe;
+      color:#1e3a8a;
+      padding:.6rem .85rem;
+      border-radius:999px;
+      font-weight:700;
+      font-size:.9rem;
+      margin-top:.9rem;
+    }
+
     /* Floating quick actions */
     .floating-actions{
       position:fixed;
@@ -248,7 +281,7 @@
       color:#fff;
       box-shadow:0 12px 28px rgba(2,6,23,.18);
       border:1px solid rgba(255,255,255,.18);
-      font-size:1.25rem;
+      font-size:1.05rem;
       font-weight:800;
     }
     .fab.whatsapp{background:#16a34a}
@@ -290,7 +323,6 @@
       border-radius:20px;
       box-shadow:var(--shadow);
       display:grid;
-      grid-template-columns: repeat(4,1fr);
       gap:0;
       overflow:hidden;
     }
@@ -473,6 +505,25 @@
     }
     .btn-outline:hover{background:#f8fafc}
 
+    /* Quote form map picker rows */
+    .location-picker-row{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:.6rem;
+    }
+    .map-pick-btn{
+      white-space:nowrap;
+      border:1px solid #cbd5e1;
+      background:#f8fafc;
+      color:#0f172a;
+      border-radius:12px;
+      padding:.85rem .9rem;
+      font-weight:700;
+      cursor:pointer;
+      font:inherit;
+    }
+    .map-pick-btn:hover{ background:#eef2f7; }
+
     /* About / trust */
     .about-wrap{
       display:grid;
@@ -591,6 +642,105 @@
       filter:grayscale(.05) contrast(1.02);
     }
 
+    /* Map modal */
+    .map-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(2,6,23,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+      padding:14px;
+    }
+    .map-modal.active{ display:flex; }
+    .map-modal-card{
+      width:min(960px, 100%);
+      background:#fff;
+      border-radius:18px;
+      border:1px solid #e2e8f0;
+      box-shadow:0 20px 50px rgba(2,6,23,.25);
+      overflow:hidden;
+    }
+    .map-modal-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      padding:.85rem 1rem;
+      border-bottom:1px solid #e2e8f0;
+    }
+    .map-modal-head h3{
+      margin:0;
+      font-size:1rem;
+    }
+    .map-modal-head button{
+      border:1px solid #cbd5e1;
+      background:#fff;
+      border-radius:10px;
+      padding:.45rem .7rem;
+      cursor:pointer;
+      font-weight:700;
+      font:inherit;
+    }
+    .map-toolbar{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+      padding:.75rem 1rem;
+      border-bottom:1px solid #e2e8f0;
+      background:#f8fafc;
+    }
+    .map-toolbar input{
+      flex:1;
+      min-width:220px;
+      padding:.7rem .8rem;
+      border:1px solid #cbd5e1;
+      border-radius:10px;
+    }
+    .map-toolbar button{
+      border:1px solid #cbd5e1;
+      background:#fff;
+      border-radius:10px;
+      padding:.7rem .85rem;
+      cursor:pointer;
+      font-weight:700;
+      font:inherit;
+    }
+    #mapPicker{
+      width:100%;
+      height:420px;
+    }
+    .map-footer{
+      padding:.8rem 1rem 1rem;
+      border-top:1px solid #e2e8f0;
+      background:#fff;
+    }
+    .map-footer .coords{
+      color:#475569;
+      font-size:.9rem;
+      margin-bottom:.7rem;
+    }
+    .map-footer .actions{
+      display:flex;
+      gap:.6rem;
+      flex-wrap:wrap;
+    }
+    .map-footer .actions button{
+      border:1px solid #cbd5e1;
+      background:#fff;
+      border-radius:10px;
+      padding:.7rem .95rem;
+      cursor:pointer;
+      font-weight:700;
+      font:inherit;
+    }
+    .map-footer .actions .primary{
+      background:#16a34a;
+      color:#fff;
+      border-color:#16a34a;
+    }
+
     /* Footer */
     .footer{
       background:#0b1220;
@@ -627,13 +777,11 @@
       .reviews{grid-template-columns:1fr 1fr}
       .gallery-grid{grid-template-columns:1fr 1fr}
       .gallery-card.tall{grid-row:auto; min-height:260px}
+      .info-grid[style*="repeat(5"]{ grid-template-columns: repeat(2,1fr) !important; }
     }
     @media (max-width: 760px){
       .nav-links a{display:none}
       .nav-cta{padding:.65rem .85rem}
-      .info-grid{grid-template-columns:1fr 1fr}
-      .info-item:nth-child(2){border-right:none}
-      .info-item:nth-child(1), .info-item:nth-child(2){border-bottom:1px solid var(--border)}
       .cards{grid-template-columns:1fr}
       .gallery-grid{grid-template-columns:1fr}
       .gallery-card,.gallery-card.tall{min-height:220px}
@@ -642,6 +790,8 @@
       .footer-inner{align-items:flex-start}
       .cta-row .btn{width:100%}
       .quote-actions .btn{width:100%}
+      .location-picker-row{ grid-template-columns:1fr; }
+      .info-grid[style*="repeat(5"]{ grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -718,6 +868,9 @@
             </div>
             <div style="font-size:1.2rem;">💚</div>
           </div>
+
+          <div class="vehicle-badge">🚘 Toyota Axio Type 3 • White</div>
+
           <ul>
             <li>Airport pickups & drops (CMB / Bandaranaike)</li>
             <li>Tourist trips to Ella, Kandy, Sigiriya, Galle & more</li>
@@ -734,10 +887,18 @@
     <!-- Info strip -->
     <section class="info-strip" aria-label="Business highlights">
       <div class="container">
-        <div class="info-grid">
+        <div class="info-grid" style="grid-template-columns: repeat(5,1fr);">
           <div class="info-item">
             <span class="label">Driver</span>
             <strong>Anil Wasantha</strong>
+          </div>
+          <div class="info-item">
+            <span class="label">Vehicle</span>
+            <strong>Toyota Axio Type 3</strong>
+          </div>
+          <div class="info-item">
+            <span class="label">Car Color</span>
+            <strong>White</strong>
           </div>
           <div class="info-item">
             <span class="label">Phone / WhatsApp</span>
@@ -746,10 +907,6 @@
           <div class="info-item">
             <span class="label">Pricing</span>
             <strong>From LKR 100 per km</strong>
-          </div>
-          <div class="info-item">
-            <span class="label">Coverage</span>
-            <strong>Islandwide Sri Lanka</strong>
           </div>
         </div>
       </div>
@@ -802,8 +959,7 @@
 
         <div class="gallery-grid">
           <article class="gallery-card tall">
-            <!-- Ella / Hill country style image -->
-            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80" alt="Scenic hill country landscape in Sri Lanka" />
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nine%20Arches%20Bridge%20in%20Ella.jpg" alt="Nine Arches Bridge in Ella, Sri Lanka" />
             <div class="gallery-caption">
               <strong>Hill Country Journeys</strong>
               <span>Ella • Nuwara Eliya • Scenic mountain routes</span>
@@ -811,8 +967,7 @@
           </article>
 
           <article class="gallery-card">
-            <!-- Sigiriya style / heritage -->
-            <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?auto=format&fit=crop&w=900&q=80" alt="Historic destination travel in Sri Lanka" />
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Sigiriya%20Sri%20Lanka.jpg" alt="Sigiriya Rock Fortress, Sri Lanka" />
             <div class="gallery-caption">
               <strong>Cultural Routes</strong>
               <span>Sigiriya • Dambulla • Kandy</span>
@@ -820,8 +975,7 @@
           </article>
 
           <article class="gallery-card">
-            <!-- South coast / beach -->
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" alt="Beautiful coastal destination in Sri Lanka" />
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Galle%20Fort%20-Srilanka.jpg" alt="Galle Fort, Sri Lanka" />
             <div class="gallery-caption">
               <strong>South Coast Travel</strong>
               <span>Galle • Mirissa • Bentota</span>
@@ -829,8 +983,7 @@
           </article>
 
           <article class="gallery-card">
-            <!-- Colombo / urban travel -->
-            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=900&q=80" alt="City private driver and airport transfer travel" />
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Colombo%20skyline%202024.jpg" alt="Colombo skyline, Sri Lanka" />
             <div class="gallery-caption">
               <strong>City & Airport Transfers</strong>
               <span>Colombo • Negombo • Airport pickups</span>
@@ -838,8 +991,7 @@
           </article>
 
           <article class="gallery-card">
-            <!-- Nature / road trip -->
-            <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=80" alt="Nature route road trips across Sri Lanka" />
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Nine-Arch%20Bridge%20in%20Sri%20Lanka.jpg" alt="Scenic travel destination in Sri Lanka" />
             <div class="gallery-caption">
               <strong>Flexible Road Trips</strong>
               <span>Custom plans • Family-friendly routes</span>
@@ -884,6 +1036,7 @@
 
             <ul>
               <li><strong>Base rate:</strong> From LKR 100 per kilometer</li>
+              <li><strong>Vehicle:</strong> Toyota Axio Type 3 (White)</li>
               <li><strong>Airport transfers:</strong> Price depends on pickup/drop destination and waiting time</li>
               <li><strong>Tourist trips:</strong> Price depends on route, stops, total distance, and trip duration</li>
               <li><strong>Long-distance travel:</strong> Custom quote available for one-way or round trips</li>
@@ -897,14 +1050,28 @@
 
           <div class="pricing-card">
             <h3 style="margin:.2rem 0 .7rem;">Request a Quote</h3>
-            <form class="quote-form" id="quoteForm">
+            <form class="quote-form" id="quoteForm" onsubmit="event.preventDefault(); sendToWhatsApp();">
               <input type="text" id="name" placeholder="Your name" />
-              <input type="text" id="pickup" placeholder="Pickup location" />
-              <input type="text" id="destination" placeholder="Destination" />
+
+              <div class="location-picker-row">
+                <input type="text" id="pickup" placeholder="Pickup location (or pick on map)" readonly />
+                <button type="button" class="map-pick-btn" onclick="openMapPicker('pickup')">Pick Pickup on Map</button>
+              </div>
+
+              <div class="location-picker-row">
+                <input type="text" id="destination" placeholder="Destination (or pick on map)" readonly />
+                <button type="button" class="map-pick-btn" onclick="openMapPicker('destination')">Pick Destination on Map</button>
+              </div>
+
+              <!-- hidden coordinate fields -->
+              <input type="hidden" id="pickupCoords" />
+              <input type="hidden" id="destinationCoords" />
+
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:.75rem;">
                 <input type="date" id="date" />
                 <input type="time" id="time" />
               </div>
+
               <div style="display:grid; grid-template-columns:1fr 1fr; gap:.75rem;">
                 <select id="passengers">
                   <option value="">Passengers</option>
@@ -922,13 +1089,14 @@
                   <option>Long Distance Travel</option>
                 </select>
               </div>
+
               <textarea id="notes" placeholder="Extra details (luggage count, stops, return trip, etc.)"></textarea>
 
               <div class="quote-actions">
                 <button type="button" class="btn btn-primary" onclick="sendToWhatsApp()">Send Quote Request on WhatsApp</button>
                 <a class="btn btn-outline" href="tel:+94768568033">Call Anil Wasantha</a>
               </div>
-              <div class="mini-note">This form sends your details to WhatsApp (no server needed).</div>
+              <div class="mini-note">This form sends your details to WhatsApp (no server needed). You can select pickup and destination directly on the map.</div>
             </form>
           </div>
         </div>
@@ -948,7 +1116,7 @@
         <div class="about-wrap">
           <div class="photo-card">
             <!-- Replace this with your father's real photo later -->
-            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Professional driver and travel service in Sri Lanka" />
+            <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Colombo%20skyline%202024.jpg" alt="Professional driver and travel service in Sri Lanka" />
             <div class="overlay">
               <strong style="display:block;font-size:1.05rem;">Anil Wasantha</strong>
               <span style="font-size:.9rem;color:rgba(255,255,255,.92);">Private Driver • Tours & Transfers • Sri Lanka</span>
@@ -961,6 +1129,13 @@
               Anil Wasantha provides private transportation services for airport transfers, day hires, and tourist travel across Sri Lanka.
               The focus is on safe driving, punctual pickups, comfortable rides, and friendly communication from booking to drop-off.
             </p>
+
+            <div style="margin-top:.9rem;padding:.9rem;border:1px solid #e2e8f0;border-radius:14px;background:#f8fafc;">
+              <strong style="display:block;margin-bottom:.35rem;">Vehicle Details</strong>
+              <div style="color:#334155;font-size:.95rem;">
+                Toyota Axio Type 3 • White color • Comfortable private transport for airport pickups, tourist rides, and long-distance travel.
+              </div>
+            </div>
 
             <div class="list">
               <div class="item">✅ Safe driving</div>
@@ -1047,6 +1222,14 @@
               </div>
 
               <div class="contact-row">
+                <div class="dot">🚘</div>
+                <div>
+                  <strong>Vehicle</strong>
+                  <span>Toyota Axio Type 3 (White)</span>
+                </div>
+              </div>
+
+              <div class="contact-row">
                 <div class="dot">💸</div>
                 <div>
                   <strong>Pricing</strong>
@@ -1076,7 +1259,6 @@
           </div>
 
           <div class="map-card" aria-label="Sri Lanka travel map">
-            <!-- You can replace this with a specific Google Maps route/location embed later -->
             <iframe
               src="https://www.google.com/maps?q=Sri%20Lanka&output=embed"
               loading="lazy"
@@ -1094,7 +1276,7 @@
     <div class="container footer-inner">
       <div>
         <strong style="color:#fff;">Anil Wasantha Tours & Transfers</strong><br />
-        <span style="font-size:.9rem;">Private Driver Service in Sri Lanka • Airport Pickups • Tourist Trips • From LKR 100/km</span>
+        <span style="font-size:.9rem;">Toyota Axio Type 3 (White) • Private Driver Service in Sri Lanka • Airport Pickups • Tourist Trips • From LKR 100/km</span>
       </div>
       <div class="foot-links">
         <a href="#services">Services</a>
@@ -1106,13 +1288,42 @@
     </div>
   </footer>
 
+  <!-- Map Picker Modal -->
+  <div class="map-modal" id="mapModal" aria-hidden="true">
+    <div class="map-modal-card">
+      <div class="map-modal-head">
+        <h3 id="mapModalTitle">Select Location</h3>
+        <button type="button" onclick="closeMapPicker()">Close</button>
+      </div>
+
+      <div class="map-toolbar">
+        <input type="text" id="mapSearchInput" placeholder="Search Sri Lanka location (e.g., Ella, Colombo Fort, Sigiriya)" />
+        <button type="button" onclick="searchMapLocation()">Search</button>
+        <button type="button" onclick="useCurrentLocation()">Use My Current Location</button>
+      </div>
+
+      <div id="mapPicker"></div>
+
+      <div class="map-footer">
+        <div class="coords" id="pickedLocationText">Click on the map to choose a location.</div>
+        <div class="actions">
+          <button type="button" onclick="clearPickedLocation()">Clear</button>
+          <button type="button" class="primary" onclick="confirmPickedLocation()">Use This Location</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     function val(id){ return document.getElementById(id)?.value?.trim() || ""; }
 
+    /* ========= WhatsApp Quote ========= */
     function sendToWhatsApp(){
       const name = val("name");
       const pickup = val("pickup");
       const destination = val("destination");
+      const pickupCoords = val("pickupCoords");
+      const destinationCoords = val("destinationCoords");
       const date = val("date");
       const time = val("time");
       const passengers = val("passengers");
@@ -1125,18 +1336,204 @@
 Name: ${name || "-"}
 Trip Type: ${tripType || "-"}
 Pickup Location: ${pickup || "-"}
+Pickup Coordinates: ${pickupCoords || "-"}
 Destination: ${destination || "-"}
+Destination Coordinates: ${destinationCoords || "-"}
 Date: ${date || "-"}
 Time: ${time || "-"}
 Passengers: ${passengers || "-"}
 Extra Details: ${notes || "-"}
 
+Vehicle: Toyota Axio Type 3 (White)
 Please share price and availability.
 (Starting price noted: From LKR 100/km)`;
 
       const url = "https://wa.me/94768568033?text=" + encodeURIComponent(message);
       window.open(url, "_blank", "noopener");
     }
+
+    /* ========= Map Picker (Leaflet + OSM) ========= */
+    let map;
+    let pickerMarker;
+    let activeField = null; // "pickup" or "destination"
+    let pickedLatLng = null;
+    let pickedLabel = "";
+
+    const sriLankaCenter = [7.8731, 80.7718];
+
+    function initMapIfNeeded(){
+      if(map) return;
+
+      map = L.map('mapPicker').setView(sriLankaCenter, 7);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      map.on('click', async function(e){
+        pickedLatLng = e.latlng;
+        setMarker(e.latlng);
+
+        const label = await reverseGeocode(e.latlng.lat, e.latlng.lng);
+        pickedLabel = label || `${e.latlng.lat.toFixed(6)}, ${e.latlng.lng.toFixed(6)}`;
+
+        document.getElementById('pickedLocationText').textContent =
+          `Selected: ${pickedLabel} (${e.latlng.lat.toFixed(6)}, ${e.latlng.lng.toFixed(6)})`;
+      });
+    }
+
+    function openMapPicker(field){
+      activeField = field;
+      pickedLatLng = null;
+      pickedLabel = "";
+      document.getElementById('mapModalTitle').textContent =
+        field === 'pickup' ? 'Select Pickup Location' : 'Select Destination Location';
+      document.getElementById('pickedLocationText').textContent = 'Click on the map to choose a location.';
+      document.getElementById('mapModal').classList.add('active');
+      document.getElementById('mapModal').setAttribute('aria-hidden', 'false');
+
+      setTimeout(() => {
+        initMapIfNeeded();
+        map.invalidateSize();
+
+        const coordsField = document.getElementById(field + 'Coords').value;
+        if(coordsField && coordsField.includes(',')){
+          const [lat, lng] = coordsField.split(',').map(Number);
+          if(!isNaN(lat) && !isNaN(lng)){
+            const ll = L.latLng(lat, lng);
+            map.setView(ll, 12);
+            setMarker(ll);
+            pickedLatLng = ll;
+            pickedLabel = document.getElementById(field).value || `${lat}, ${lng}`;
+            document.getElementById('pickedLocationText').textContent =
+              `Selected: ${pickedLabel} (${lat.toFixed(6)}, ${lng.toFixed(6)})`;
+            return;
+          }
+        }
+
+        map.setView(sriLankaCenter, 7);
+        if(pickerMarker){ map.removeLayer(pickerMarker); pickerMarker = null; }
+      }, 50);
+    }
+
+    function closeMapPicker(){
+      document.getElementById('mapModal').classList.remove('active');
+      document.getElementById('mapModal').setAttribute('aria-hidden', 'true');
+    }
+
+    function setMarker(latlng){
+      if(pickerMarker){
+        pickerMarker.setLatLng(latlng);
+      } else {
+        pickerMarker = L.marker(latlng).addTo(map);
+      }
+    }
+
+    function clearPickedLocation(){
+      pickedLatLng = null;
+      pickedLabel = "";
+      document.getElementById('pickedLocationText').textContent = 'Click on the map to choose a location.';
+      if(pickerMarker && map){
+        map.removeLayer(pickerMarker);
+        pickerMarker = null;
+      }
+    }
+
+    function confirmPickedLocation(){
+      if(!activeField || !pickedLatLng){
+        alert("Please click a location on the map first.");
+        return;
+      }
+
+      const textField = document.getElementById(activeField);
+      const coordsField = document.getElementById(activeField + 'Coords');
+
+      textField.value = pickedLabel || `${pickedLatLng.lat.toFixed(6)}, ${pickedLatLng.lng.toFixed(6)}`;
+      coordsField.value = `${pickedLatLng.lat.toFixed(6)},${pickedLatLng.lng.toFixed(6)}`;
+
+      closeMapPicker();
+    }
+
+    async function searchMapLocation(){
+      const q = document.getElementById('mapSearchInput').value.trim();
+      if(!q) return;
+
+      try{
+        const url = `https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=lk&q=${encodeURIComponent(q)}`;
+        const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        const data = await res.json();
+
+        if(!data || !data.length){
+          alert("Location not found in Sri Lanka. Try another place name.");
+          return;
+        }
+
+        const item = data[0];
+        const lat = parseFloat(item.lat);
+        const lon = parseFloat(item.lon);
+        const ll = L.latLng(lat, lon);
+
+        map.setView(ll, 13);
+        setMarker(ll);
+        pickedLatLng = ll;
+        pickedLabel = item.display_name || q;
+
+        document.getElementById('pickedLocationText').textContent =
+          `Selected: ${pickedLabel} (${lat.toFixed(6)}, ${lon.toFixed(6)})`;
+      } catch (err){
+        console.error(err);
+        alert("Could not search location. Please click on the map instead.");
+      }
+    }
+
+    async function reverseGeocode(lat, lng){
+      try{
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`;
+        const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+        const data = await res.json();
+        return data?.display_name || "";
+      } catch(e){
+        return "";
+      }
+    }
+
+    function useCurrentLocation(){
+      if(!navigator.geolocation){
+        alert("Geolocation is not supported on this device/browser.");
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(async (pos) => {
+        const lat = pos.coords.latitude;
+        const lng = pos.coords.longitude;
+        const ll = L.latLng(lat, lng);
+
+        map.setView(ll, 14);
+        setMarker(ll);
+        pickedLatLng = ll;
+
+        const label = await reverseGeocode(lat, lng);
+        pickedLabel = label || `Current Location (${lat.toFixed(6)}, ${lng.toFixed(6)})`;
+
+        document.getElementById('pickedLocationText').textContent =
+          `Selected: ${pickedLabel} (${lat.toFixed(6)}, ${lng.toFixed(6)})`;
+      }, () => {
+        alert("Couldn't get your current location. Please allow location permission or pick on the map.");
+      }, {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      });
+    }
+
+    // Close modal when clicking background
+    document.addEventListener('click', function(e){
+      const modal = document.getElementById('mapModal');
+      if(e.target === modal){
+        closeMapPicker();
+      }
+    });
   </script>
 </body>
 </html>
