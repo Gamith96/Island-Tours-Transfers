@@ -3,296 +3,1140 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sanka Private Driver Sri Lanka</title>
-  <meta name="description" content="Private driver in Sri Lanka for airport pickups, private hires, and tourist trips to Ella, Kandy, Sigiriya, Galle, Mirissa and more." />
+  <title>Anil Wasantha Tours & Transfers | Private Driver Sri Lanka</title>
+  <meta name="description" content="Private driver service in Sri Lanka by Anil Wasantha. Airport pickups, tourist trips, and private hires across Sri Lanka. Prices from LKR 100 per km." />
+  <meta name="theme-color" content="#0f172a" />
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      color: #222;
-      background: #f7f7f7;
+    :root{
+      --bg:#0b1220;
+      --card:#ffffff;
+      --muted:#64748b;
+      --text:#0f172a;
+      --primary:#16a34a;
+      --primary-dark:#15803d;
+      --accent:#f59e0b;
+      --soft:#f8fafc;
+      --border:#e2e8f0;
+      --shadow:0 10px 30px rgba(2,6,23,.10);
+      --radius:18px;
+      --max:1180px;
     }
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: auto;
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:#fff;
+      line-height:1.55;
     }
-    header {
-      background: #0f172a;
-      color: white;
-      padding: 18px 0;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    .container{
+      width:min(92%, var(--max));
+      margin-inline:auto;
     }
-    .nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
+
+    /* Header */
+    .header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:saturate(160%) blur(10px);
+      background:rgba(255,255,255,.82);
+      border-bottom:1px solid rgba(226,232,240,.75);
     }
-    .brand {
-      font-size: 20px;
-      font-weight: bold;
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      min-height:72px;
     }
-    .nav a {
-      color: white;
-      text-decoration: none;
-      margin-left: 14px;
-      font-size: 14px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.7rem;
+      font-weight:800;
+      color:#0f172a;
+      letter-spacing:.2px;
     }
-    .hero {
-      background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.75)),
-        url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
-      color: white;
-      padding: 70px 0;
+    .brand-badge{
+      width:40px;height:40px;border-radius:12px;
+      display:grid;place-items:center;
+      color:#fff;
+      background:linear-gradient(135deg,#0f172a,#1e293b 55%, #334155);
+      box-shadow:0 8px 18px rgba(15,23,42,.18);
+      font-weight:700;
     }
-    .hero h1 {
-      font-size: 36px;
-      margin: 0 0 10px;
+    .brand small{
+      display:block;
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:.2px;
+      font-size:.72rem;
+      margin-top:2px;
     }
-    .hero p {
-      max-width: 700px;
-      margin: 0 0 20px;
-      font-size: 17px;
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:1rem;
+      flex-wrap:wrap;
     }
-    .btns {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
+    .nav-links a{
+      color:#334155;
+      font-weight:600;
+      font-size:.95rem;
     }
-    .btn {
-      display: inline-block;
-      padding: 12px 18px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 14px;
+    .nav-cta{
+      display:inline-flex;align-items:center;gap:.5rem;
+      background:var(--primary);
+      color:#fff;
+      padding:.7rem 1rem;
+      border-radius:12px;
+      font-weight:700;
+      box-shadow:0 8px 18px rgba(22,163,74,.22);
     }
-    .btn-primary {
-      background: #22c55e;
-      color: #072b13;
+    .nav-cta:hover{background:var(--primary-dark)}
+
+    /* Hero */
+    .hero{
+      position:relative;
+      isolation:isolate;
+      color:#fff;
+      background:
+        linear-gradient(180deg, rgba(2,6,23,.62), rgba(2,6,23,.76)),
+        url('https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
     }
-    .btn-secondary {
-      background: white;
-      color: #0f172a;
+    .hero::after{
+      content:"";
+      position:absolute;inset:0;
+      background:
+        radial-gradient(600px 240px at 15% 15%, rgba(255,255,255,.12), transparent 60%),
+        radial-gradient(500px 220px at 85% 20%, rgba(245,158,11,.12), transparent 60%);
+      z-index:-1;
     }
-    section {
-      padding: 45px 0;
+    .hero-wrap{
+      padding: clamp(4.5rem, 8vw, 7rem) 0 3.5rem;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:1.25rem;
+      align-items:end;
     }
-    h2 {
-      margin-top: 0;
-      font-size: 28px;
-      color: #0f172a;
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.45rem;
+      padding:.45rem .75rem;
+      border-radius:999px;
+      background:rgba(255,255,255,.13);
+      border:1px solid rgba(255,255,255,.14);
+      font-size:.88rem;
+      font-weight:700;
+      margin-bottom:.9rem;
     }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
+    .hero h1{
+      margin:0;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height:1.06;
+      letter-spacing:-.02em;
+      max-width:14ch;
     }
-    .card {
-      background: white;
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    .hero p{
+      margin:1rem 0 1.25rem;
+      color:rgba(255,255,255,.92);
+      max-width:58ch;
+      font-size:1.02rem;
     }
-    .highlight {
-      background: #ecfeff;
-      border-left: 4px solid #0891b2;
-      padding: 14px;
-      border-radius: 8px;
-      margin: 15px 0;
+    .cta-row{
+      display:flex; flex-wrap:wrap; gap:.75rem;
+      margin:1.1rem 0 1rem;
     }
-    .routes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.55rem;
+      padding:.9rem 1.05rem;
+      border-radius:12px;
+      font-weight:700;
+      transition:.2s ease;
+      border:1px solid transparent;
     }
-    .tag {
-      background: #e2e8f0;
-      color: #0f172a;
-      padding: 7px 12px;
-      border-radius: 999px;
-      font-size: 13px;
+    .btn-primary{
+      background:var(--primary);
+      color:#fff;
+      box-shadow:0 8px 18px rgba(22,163,74,.22);
     }
-    .reviews p {
-      margin: 0;
+    .btn-primary:hover{background:var(--primary-dark); transform:translateY(-1px)}
+    .btn-ghost{
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border-color:rgba(255,255,255,.24);
     }
-    .contact-box {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    .btn-ghost:hover{background:rgba(255,255,255,.14)}
+
+    .hero-points{
+      display:flex; flex-wrap:wrap; gap:.5rem;
+      margin-top:.75rem;
     }
-    .contact-list {
-      padding-left: 18px;
-      margin: 8px 0 0;
+    .chip{
+      display:inline-flex; align-items:center; gap:.4rem;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.15);
+      color:#fff;
+      padding:.45rem .65rem;
+      border-radius:999px;
+      font-weight:600;
+      font-size:.84rem;
     }
-    footer {
-      background: #0f172a;
-      color: white;
-      text-align: center;
-      padding: 18px 0;
-      margin-top: 20px;
+
+    .hero-card{
+      background:rgba(255,255,255,.96);
+      color:var(--text);
+      border-radius:22px;
+      padding:1rem;
+      box-shadow:0 20px 50px rgba(2,6,23,.22);
+      border:1px solid rgba(226,232,240,.9);
     }
-    .small {
-      font-size: 13px;
-      color: #555;
+    .hero-card h3{
+      margin:.25rem 0 .5rem;
+      font-size:1.05rem;
     }
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 28px; }
-      .hero p { font-size: 15px; }
-      .nav-links {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      .nav a { margin-left: 0; }
+    .hero-card .price{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:1rem;
+      background:linear-gradient(135deg,#f8fafc,#eef2ff);
+      border:1px solid #e2e8f0;
+      border-radius:16px;
+      padding:.95rem;
+      margin:.6rem 0 .9rem;
+    }
+    .hero-card .price strong{
+      font-size:1.15rem;
+      color:#0f172a;
+      letter-spacing:.2px;
+    }
+    .hero-card ul{
+      margin:.6rem 0 0;
+      padding-left:1.05rem;
+      color:#334155;
+    }
+    .hero-card li{margin:.35rem 0}
+    .mini-note{
+      color:var(--muted);
+      font-size:.84rem;
+      margin-top:.55rem;
+    }
+
+    /* Floating quick actions */
+    .floating-actions{
+      position:fixed;
+      right:14px;
+      bottom:14px;
+      z-index:55;
+      display:flex;
+      flex-direction:column;
+      gap:.55rem;
+    }
+    .fab{
+      width:54px;height:54px;border-radius:16px;
+      display:grid;place-items:center;
+      color:#fff;
+      box-shadow:0 12px 28px rgba(2,6,23,.18);
+      border:1px solid rgba(255,255,255,.18);
+      font-size:1.25rem;
+      font-weight:800;
+    }
+    .fab.whatsapp{background:#16a34a}
+    .fab.call{background:#0f172a}
+
+    /* Sections */
+    section{
+      padding: 4.2rem 0;
+    }
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:1rem;
+      margin-bottom:1.2rem;
+      flex-wrap:wrap;
+    }
+    .section-head h2{
+      margin:0;
+      font-size: clamp(1.45rem, 2.2vw, 2rem);
+      letter-spacing:-.02em;
+      color:#0f172a;
+    }
+    .section-head p{
+      margin:.3rem 0 0;
+      color:var(--muted);
+      max-width:64ch;
+    }
+
+    /* Info strip */
+    .info-strip{
+      margin-top:-1.3rem;
+      position:relative;
+      z-index:3;
+    }
+    .info-grid{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns: repeat(4,1fr);
+      gap:0;
+      overflow:hidden;
+    }
+    .info-item{
+      padding:1rem 1rem;
+      border-right:1px solid var(--border);
+    }
+    .info-item:last-child{border-right:none}
+    .info-item .label{
+      color:var(--muted);
+      font-size:.85rem;
+      margin-bottom:.3rem;
+      display:block;
+    }
+    .info-item strong{
+      color:#0f172a;
+      font-size:1rem;
+    }
+
+    /* Services */
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:1rem;
+    }
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:1rem;
+      box-shadow:var(--shadow);
+    }
+    .icon{
+      width:42px;height:42px;border-radius:12px;
+      display:grid;place-items:center;
+      background:#f1f5f9;
+      color:#0f172a;
+      font-weight:800;
+      margin-bottom:.75rem;
+    }
+    .card h3{
+      margin:.2rem 0 .35rem;
+      font-size:1rem;
+    }
+    .card p{
+      margin:0;
+      color:#475569;
+      font-size:.94rem;
+    }
+
+    /* Destinations gallery */
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:2fr 1fr 1fr;
+      gap:1rem;
+    }
+    .gallery-card{
+      position:relative;
+      min-height:230px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      background:#e2e8f0;
+    }
+    .gallery-card img{
+      width:100%; height:100%; object-fit:cover;
+      transform:scale(1.02);
+      transition:transform .35s ease;
+    }
+    .gallery-card:hover img{ transform:scale(1.06); }
+    .gallery-card::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(2,6,23,.05), rgba(2,6,23,.62));
+    }
+    .gallery-caption{
+      position:absolute; left:14px; bottom:12px; right:14px;
+      z-index:2;
+      color:#fff;
+    }
+    .gallery-caption strong{
+      display:block;
+      font-size:1rem;
+      letter-spacing:.2px;
+    }
+    .gallery-caption span{
+      font-size:.83rem;
+      color:rgba(255,255,255,.92);
+    }
+    .gallery-card.tall{
+      grid-row: span 2;
+      min-height:480px;
+    }
+
+    /* Route tags */
+    .route-tags{
+      display:flex; flex-wrap:wrap; gap:.6rem;
+      margin-top:1rem;
+    }
+    .route-tag{
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      color:#0f172a;
+      border-radius:999px;
+      padding:.55rem .85rem;
+      font-weight:600;
+      font-size:.9rem;
+    }
+
+    /* Pricing */
+    .pricing-wrap{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:1rem;
+      align-items:start;
+    }
+    .pricing-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:1rem;
+    }
+    .price-banner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      border-radius:16px;
+      padding:1rem;
+      background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+      border:1px solid #bbf7d0;
+      margin-bottom:.8rem;
+    }
+    .price-banner strong{
+      font-size:1.4rem;
+      color:#14532d;
+      letter-spacing:-.02em;
+    }
+    .pricing-card ul{
+      margin:.5rem 0 0; padding-left:1rem;
+      color:#334155;
+    }
+    .pricing-card li{margin:.35rem 0}
+    .pricing-note{
+      color:#64748b;
+      font-size:.88rem;
+      margin-top:.6rem;
+    }
+
+    .quote-form{
+      display:grid;
+      gap:.75rem;
+    }
+    .quote-form input,
+    .quote-form select,
+    .quote-form textarea{
+      width:100%;
+      padding:.85rem .9rem;
+      border-radius:12px;
+      border:1px solid #cbd5e1;
+      background:#fff;
+      font:inherit;
+      color:#0f172a;
+      outline:none;
+    }
+    .quote-form input:focus,
+    .quote-form select:focus,
+    .quote-form textarea:focus{
+      border-color:#22c55e;
+      box-shadow:0 0 0 4px rgba(34,197,94,.12);
+    }
+    .quote-form textarea{min-height:110px; resize:vertical}
+    .quote-actions{display:flex; gap:.6rem; flex-wrap:wrap}
+    .btn-outline{
+      background:#fff;
+      border:1px solid #cbd5e1;
+      color:#0f172a;
+    }
+    .btn-outline:hover{background:#f8fafc}
+
+    /* About / trust */
+    .about-wrap{
+      display:grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap:1rem;
+      align-items:stretch;
+    }
+    .photo-card{
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      min-height:380px;
+      position:relative;
+      background:#e2e8f0;
+    }
+    .photo-card img{width:100%;height:100%;object-fit:cover}
+    .photo-card::after{
+      content:"";
+      position:absolute; inset:0;
+      background:linear-gradient(180deg, rgba(2,6,23,0), rgba(2,6,23,.46));
+    }
+    .photo-card .overlay{
+      position:absolute; left:16px; right:16px; bottom:14px;
+      color:#fff; z-index:2;
+    }
+    .about-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      padding:1rem;
+    }
+    .list{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:.65rem;
+      margin-top:.8rem;
+    }
+    .list .item{
+      border:1px solid #e2e8f0;
+      border-radius:14px;
+      padding:.75rem;
+      background:#f8fafc;
+      font-weight:600;
+      color:#0f172a;
+    }
+
+    /* Reviews */
+    .reviews{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:1rem;
+    }
+    .review{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:1rem;
+      box-shadow:var(--shadow);
+    }
+    .stars{
+      color:#f59e0b;
+      letter-spacing:2px;
+      font-size:1rem;
+      margin-bottom:.5rem;
+    }
+    .review p{
+      margin:0;
+      color:#334155;
+      font-size:.95rem;
+    }
+    .review .who{
+      margin-top:.7rem;
+      color:#64748b;
+      font-weight:600;
+      font-size:.88rem;
+    }
+
+    /* Contact */
+    .contact-wrap{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:1rem;
+    }
+    .contact-card, .map-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .contact-card{padding:1rem}
+    .contact-list{
+      display:grid;
+      gap:.7rem;
+      margin-top:.7rem;
+    }
+    .contact-row{
+      display:flex; gap:.8rem; align-items:flex-start;
+      padding:.75rem;
+      border:1px solid #e2e8f0;
+      border-radius:14px;
+      background:#f8fafc;
+    }
+    .contact-row .dot{
+      width:34px;height:34px;border-radius:10px;
+      display:grid;place-items:center;
+      background:#e2e8f0;font-weight:800;color:#0f172a;
+      flex-shrink:0;
+    }
+    .contact-row strong{display:block}
+    .contact-row span{color:#64748b; font-size:.9rem}
+    .map-card iframe{
+      width:100%; height:100%; min-height:380px; border:0;
+      filter:grayscale(.05) contrast(1.02);
+    }
+
+    /* Footer */
+    .footer{
+      background:#0b1220;
+      color:#cbd5e1;
+      margin-top:1rem;
+      border-top:1px solid rgba(148,163,184,.12);
+    }
+    .footer-inner{
+      padding:1.2rem 0 2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+      flex-wrap:wrap;
+    }
+    .footer a{color:#fff}
+    .foot-links{
+      display:flex; gap:.8rem; flex-wrap:wrap;
+    }
+    .foot-links a{
+      border:1px solid rgba(148,163,184,.22);
+      background:rgba(255,255,255,.02);
+      border-radius:999px;
+      padding:.45rem .7rem;
+      font-weight:600;
+      font-size:.88rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 1080px){
+      .hero-wrap{grid-template-columns:1fr}
+      .pricing-wrap,.about-wrap,.contact-wrap{grid-template-columns:1fr}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .reviews{grid-template-columns:1fr 1fr}
+      .gallery-grid{grid-template-columns:1fr 1fr}
+      .gallery-card.tall{grid-row:auto; min-height:260px}
+    }
+    @media (max-width: 760px){
+      .nav-links a{display:none}
+      .nav-cta{padding:.65rem .85rem}
+      .info-grid{grid-template-columns:1fr 1fr}
+      .info-item:nth-child(2){border-right:none}
+      .info-item:nth-child(1), .info-item:nth-child(2){border-bottom:1px solid var(--border)}
+      .cards{grid-template-columns:1fr}
+      .gallery-grid{grid-template-columns:1fr}
+      .gallery-card,.gallery-card.tall{min-height:220px}
+      .reviews{grid-template-columns:1fr}
+      .list{grid-template-columns:1fr}
+      .footer-inner{align-items:flex-start}
+      .cta-row .btn{width:100%}
+      .quote-actions .btn{width:100%}
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <!-- Floating actions -->
+  <div class="floating-actions" aria-label="Quick contact actions">
+    <a class="fab whatsapp" href="https://wa.me/94768568033?text=Hello%20Anil%20Wasantha,%20I%20need%20a%20ride%20/%20tour%20in%20Sri%20Lanka." target="_blank" rel="noopener" title="WhatsApp">
+      WA
+    </a>
+    <a class="fab call" href="tel:+94768568033" title="Call now">
+      ☎
+    </a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
     <div class="container nav">
-      <div class="brand">Sanka Private Driver Sri Lanka</div>
-      <div class="nav-links">
+      <a href="#top" class="brand">
+        <div class="brand-badge">AW</div>
+        <div>
+          Anil Wasantha Tours & Transfers
+          <small>Private Driver • Airport Pickups • Sri Lanka Tours</small>
+        </div>
+      </a>
+      <nav class="nav-links" aria-label="Primary navigation">
         <a href="#services">Services</a>
-        <a href="#routes">Destinations</a>
-        <a href="#reviews">Reviews</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
         <a href="#contact">Contact</a>
-      </div>
+        <a class="nav-cta" href="https://wa.me/94768568033?text=Hello%20Anil%20Wasantha,%20I%20would%20like%20to%20book%20a%20ride." target="_blank" rel="noopener">
+          Book on WhatsApp
+        </a>
+      </nav>
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
-      <h1>Safe & Reliable Private Driver in Sri Lanka 🇱🇰</h1>
-      <p>
-        Airport pickups, private hires, and tourist trips across Sri Lanka.
-        Friendly service, clean vehicle, punctual travel support for locals and foreign travelers.
-      </p>
-      <div class="btns">
-        <!-- Replace the phone number below with your father's WhatsApp number in international format -->
-        <a class="btn btn-primary" href="https://wa.me/94768568033?text=Hello%20I%20need%20a%20ride%20in%20Sri%20Lanka" target="_blank" rel="noopener">
-          Book on WhatsApp
-        </a>
-        <a class="btn btn-secondary" href="#contact">Call / Contact</a>
-      </div>
-      <div class="highlight">
-        <strong>Available for:</strong> Airport Transfers • Day Hires • Long Trips • Tourist Routes (Ella, Kandy, Sigiriya, Galle, Mirissa & more)
-      </div>
-    </div>
-  </section>
+  <!-- Hero -->
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-wrap">
+        <div>
+          <div class="eyebrow">🇱🇰 Trusted Driver Service Across Sri Lanka</div>
+          <h1>Safe, Friendly & Reliable Rides with Anil Wasantha</h1>
+          <p>
+            Private driver service for airport pickups, tourist travel, and long-distance rides across Sri Lanka.
+            Comfortable journeys for locals, families, and international visitors — with easy WhatsApp booking.
+          </p>
 
-  <section id="services">
-    <div class="container">
-      <h2>Services</h2>
-      <div class="card-grid">
-        <div class="card">
-          <h3>Airport Pickup / Drop</h3>
-          <p>Reliable transfers to and from Bandaranaike Airport (CMB) and other destinations in Sri Lanka.</p>
-        </div>
-        <div class="card">
-          <h3>Private Hire</h3>
-          <p>Hourly or full-day private hire for family travel, meetings, shopping, and personal trips.</p>
-        </div>
-        <div class="card">
-          <h3>Tourist Day Trips</h3>
-          <p>Comfortable rides to popular tourist locations with flexible pickup times and custom routes.</p>
-        </div>
-        <div class="card">
-          <h3>Long Distance Travel</h3>
-          <p>Intercity travel across Sri Lanka for individuals, couples, and families.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="https://wa.me/94768568033?text=Hello%20Anil%20Wasantha,%20I%20need%20a%20ride.%20Pickup:%20%0ADestination:%20%0ADate%20%26%20Time:%20%0APassengers:%20" target="_blank" rel="noopener">
+              Book via WhatsApp
+            </a>
+            <a class="btn btn-ghost" href="tel:+94768568033">
+              Call: 076 856 80 33
+            </a>
+          </div>
 
-  <section id="routes">
-    <div class="container">
-      <h2>Popular Destinations</h2>
-      <p>We provide private transport to many tourist and city locations across Sri Lanka:</p>
-      <div class="routes">
-        <span class="tag">Ella</span>
-        <span class="tag">Kandy</span>
-        <span class="tag">Sigiriya</span>
-        <span class="tag">Dambulla</span>
-        <span class="tag">Nuwara Eliya</span>
-        <span class="tag">Galle</span>
-        <span class="tag">Mirissa</span>
-        <span class="tag">Bentota</span>
-        <span class="tag">Negombo</span>
-        <span class="tag">Colombo</span>
-      </div>
-      <p class="small" style="margin-top: 10px;">Custom routes available on request.</p>
-    </div>
-  </section>
+          <div class="hero-points">
+            <span class="chip">✈ Airport Pickups</span>
+            <span class="chip">🚗 Private Hires</span>
+            <span class="chip">🏞 Tourist Routes</span>
+            <span class="chip">🕒 Punctual Service</span>
+          </div>
+        </div>
 
-  <section id="reviews">
-    <div class="container">
-      <h2>Customer Reviews</h2>
-      <div class="card-grid reviews">
-        <div class="card">
-          <p>“Very friendly and safe driver. On time for airport pickup and helped us throughout the trip.”</p>
-          <p class="small" style="margin-top: 8px;">— Customer Review</p>
-        </div>
-        <div class="card">
-          <p>“Comfortable trip to Ella. Good driving and easy communication on WhatsApp.”</p>
-          <p class="small" style="margin-top: 8px;">— Customer Review</p>
-        </div>
-        <div class="card">
-          <p>“Reliable private hire service. Clean vehicle and fair pricing.”</p>
-          <p class="small" style="margin-top: 8px;">— Customer Review</p>
+        <aside class="hero-card" aria-label="Quick booking details">
+          <h3>Quick Booking Information</h3>
+          <div class="price">
+            <div>
+              <div style="color:#475569;font-size:.9rem;font-weight:600;">Starting Rate</div>
+              <strong>From LKR 100 / km</strong>
+            </div>
+            <div style="font-size:1.2rem;">💚</div>
+          </div>
+          <ul>
+            <li>Airport pickups & drops (CMB / Bandaranaike)</li>
+            <li>Tourist trips to Ella, Kandy, Sigiriya, Galle & more</li>
+            <li>Private day hires and custom routes available</li>
+            <li>Fast booking confirmation via WhatsApp</li>
+          </ul>
+          <div class="mini-note">
+            Final price may vary based on route, waiting time, tolls, and trip type.
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Info strip -->
+    <section class="info-strip" aria-label="Business highlights">
+      <div class="container">
+        <div class="info-grid">
+          <div class="info-item">
+            <span class="label">Driver</span>
+            <strong>Anil Wasantha</strong>
+          </div>
+          <div class="info-item">
+            <span class="label">Phone / WhatsApp</span>
+            <strong>076 856 80 33</strong>
+          </div>
+          <div class="info-item">
+            <span class="label">Pricing</span>
+            <strong>From LKR 100 per km</strong>
+          </div>
+          <div class="info-item">
+            <span class="label">Coverage</span>
+            <strong>Islandwide Sri Lanka</strong>
+          </div>
         </div>
       </div>
-      <p class="small" style="margin-top: 12px;">Tip: Replace these with real customer reviews (best result).</p>
-    </div>
-  </section>
+    </section>
 
-  <section id="contact">
-    <div class="container">
-      <h2>Book Your Ride</h2>
-      <div class="contact-box">
-        <p><strong>Contact on WhatsApp for price and availability.</strong></p>
-        <ul class="contact-list">
-          <li><strong>WhatsApp:</strong> +94 76 856 8033</li>
-          <li><strong>Phone:</strong> +94 76 856 8033</li>
-          <li><strong>Service Area:</strong> Colombo / Negombo / Islandwide Sri Lanka</li>
-          <li><strong>Languages:</strong> Sinhala / English (edit if needed)</li>
-        </ul>
+    <!-- Services -->
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Professional Transport Services</h2>
+            <p>Comfortable and dependable transport for airport transfers, private travel, and scenic journeys around Sri Lanka.</p>
+          </div>
+        </div>
 
-        <p style="margin-top: 14px;"><strong>To book, please send:</strong></p>
-        <ul class="contact-list">
-          <li>Pickup location</li>
-          <li>Destination</li>
-          <li>Date & time</li>
-          <li>Number of passengers</li>
-          <li>Luggage count (if airport trip)</li>
-        </ul>
-
-        <p style="margin-top: 16px;">
-          <a class="btn btn-primary" href="https://wa.me/94768568033?text=Hello%20I%20want%20to%20book%20a%20ride.%20Pickup%20location%3A%20%0ADestination%3A%20%0ADate%20%26%20time%3A%20%0APassengers%3A%20%0ALuggage%3A%20" target="_blank" rel="noopener">
-            Send Booking Details on WhatsApp
-          </a>
-        </p>
+        <div class="cards">
+          <article class="card">
+            <div class="icon">✈</div>
+            <h3>Airport Pickup / Drop</h3>
+            <p>Reliable transfers to and from Bandaranaike International Airport (CMB) with on-time pickup coordination.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🚗</div>
+            <h3>Private Hire</h3>
+            <p>Hourly or full-day private hire for business, family trips, shopping, and personal travel needs.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🏞</div>
+            <h3>Tourist Trips</h3>
+            <p>Travel to Sri Lanka’s beautiful destinations with flexible schedules and friendly local driving support.</p>
+          </article>
+          <article class="card">
+            <div class="icon">🧭</div>
+            <h3>Custom Routes</h3>
+            <p>Share your itinerary and get a custom quote for one-way trips, multi-stop journeys, or multi-day travel.</p>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    <div class="container">
-      <p style="margin: 0;">© <span id="year"></span> Sanka Private Driver Sri Lanka • Safe • Friendly • Reliable</p>
+    <!-- Destinations / Gallery -->
+    <section id="destinations" style="background:var(--soft);">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Popular Destinations Across Sri Lanka</h2>
+            <p>Beautiful routes and comfortable travel to iconic places tourists love. Ideal for airport transfers and private tours.</p>
+          </div>
+        </div>
+
+        <div class="gallery-grid">
+          <article class="gallery-card tall">
+            <!-- Ella / Hill country style image -->
+            <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80" alt="Scenic hill country landscape in Sri Lanka" />
+            <div class="gallery-caption">
+              <strong>Hill Country Journeys</strong>
+              <span>Ella • Nuwara Eliya • Scenic mountain routes</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <!-- Sigiriya style / heritage -->
+            <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?auto=format&fit=crop&w=900&q=80" alt="Historic destination travel in Sri Lanka" />
+            <div class="gallery-caption">
+              <strong>Cultural Routes</strong>
+              <span>Sigiriya • Dambulla • Kandy</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <!-- South coast / beach -->
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" alt="Beautiful coastal destination in Sri Lanka" />
+            <div class="gallery-caption">
+              <strong>South Coast Travel</strong>
+              <span>Galle • Mirissa • Bentota</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <!-- Colombo / urban travel -->
+            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=900&q=80" alt="City private driver and airport transfer travel" />
+            <div class="gallery-caption">
+              <strong>City & Airport Transfers</strong>
+              <span>Colombo • Negombo • Airport pickups</span>
+            </div>
+          </article>
+
+          <article class="gallery-card">
+            <!-- Nature / road trip -->
+            <img src="https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&fit=crop&w=900&q=80" alt="Nature route road trips across Sri Lanka" />
+            <div class="gallery-caption">
+              <strong>Flexible Road Trips</strong>
+              <span>Custom plans • Family-friendly routes</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="route-tags" aria-label="Popular route tags">
+          <span class="route-tag">Ella</span>
+          <span class="route-tag">Kandy</span>
+          <span class="route-tag">Sigiriya</span>
+          <span class="route-tag">Dambulla</span>
+          <span class="route-tag">Nuwara Eliya</span>
+          <span class="route-tag">Galle</span>
+          <span class="route-tag">Mirissa</span>
+          <span class="route-tag">Bentota</span>
+          <span class="route-tag">Colombo</span>
+          <span class="route-tag">Negombo</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Pricing & Quote Requests</h2>
+            <p>Transparent starting price with quick quote confirmation through WhatsApp. Ideal for both local and tourist bookings.</p>
+          </div>
+        </div>
+
+        <div class="pricing-wrap">
+          <div class="pricing-card">
+            <div class="price-banner">
+              <div>
+                <div style="font-size:.9rem;color:#166534;font-weight:700;">Starting Price</div>
+                <strong>From LKR 100 / km</strong>
+              </div>
+              <div style="font-size:1.5rem;">💸</div>
+            </div>
+
+            <ul>
+              <li><strong>Base rate:</strong> From LKR 100 per kilometer</li>
+              <li><strong>Airport transfers:</strong> Price depends on pickup/drop destination and waiting time</li>
+              <li><strong>Tourist trips:</strong> Price depends on route, stops, total distance, and trip duration</li>
+              <li><strong>Long-distance travel:</strong> Custom quote available for one-way or round trips</li>
+              <li><strong>Custom itineraries:</strong> Send your travel plan on WhatsApp for a fast estimate</li>
+            </ul>
+
+            <p class="pricing-note">
+              *Final fare may vary based on route conditions, toll charges, parking, waiting time, and special trip requirements.
+            </p>
+          </div>
+
+          <div class="pricing-card">
+            <h3 style="margin:.2rem 0 .7rem;">Request a Quote</h3>
+            <form class="quote-form" id="quoteForm">
+              <input type="text" id="name" placeholder="Your name" />
+              <input type="text" id="pickup" placeholder="Pickup location" />
+              <input type="text" id="destination" placeholder="Destination" />
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:.75rem;">
+                <input type="date" id="date" />
+                <input type="time" id="time" />
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:.75rem;">
+                <select id="passengers">
+                  <option value="">Passengers</option>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5+</option>
+                </select>
+                <select id="tripType">
+                  <option value="">Trip type</option>
+                  <option>Airport Pickup / Drop</option>
+                  <option>Private Hire</option>
+                  <option>Tourist Trip</option>
+                  <option>Long Distance Travel</option>
+                </select>
+              </div>
+              <textarea id="notes" placeholder="Extra details (luggage count, stops, return trip, etc.)"></textarea>
+
+              <div class="quote-actions">
+                <button type="button" class="btn btn-primary" onclick="sendToWhatsApp()">Send Quote Request on WhatsApp</button>
+                <a class="btn btn-outline" href="tel:+94768568033">Call Anil Wasantha</a>
+              </div>
+              <div class="mini-note">This form sends your details to WhatsApp (no server needed).</div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About / Trust -->
+    <section id="about" style="background:var(--soft);">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Why Travel with Anil Wasantha</h2>
+            <p>Professional, courteous, and reliable private driving support for tourists, families, and local travelers across Sri Lanka.</p>
+          </div>
+        </div>
+
+        <div class="about-wrap">
+          <div class="photo-card">
+            <!-- Replace this with your father's real photo later -->
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="Professional driver and travel service in Sri Lanka" />
+            <div class="overlay">
+              <strong style="display:block;font-size:1.05rem;">Anil Wasantha</strong>
+              <span style="font-size:.9rem;color:rgba(255,255,255,.92);">Private Driver • Tours & Transfers • Sri Lanka</span>
+            </div>
+          </div>
+
+          <div class="about-card">
+            <h3 style="margin:.2rem 0 .55rem;">Trusted Private Driver Service</h3>
+            <p style="margin:0;color:#334155;">
+              Anil Wasantha provides private transportation services for airport transfers, day hires, and tourist travel across Sri Lanka.
+              The focus is on safe driving, punctual pickups, comfortable rides, and friendly communication from booking to drop-off.
+            </p>
+
+            <div class="list">
+              <div class="item">✅ Safe driving</div>
+              <div class="item">✅ Clean & comfortable ride</div>
+              <div class="item">✅ Punctual pickups</div>
+              <div class="item">✅ Tourist-friendly support</div>
+              <div class="item">✅ Islandwide routes</div>
+              <div class="item">✅ WhatsApp booking</div>
+            </div>
+
+            <div style="margin-top:1rem; display:flex; gap:.6rem; flex-wrap:wrap;">
+              <a class="btn btn-primary" href="https://wa.me/94768568033?text=Hello%20Anil%20Wasantha,%20I%20want%20to%20book%20a%20tour%20/%20transfer." target="_blank" rel="noopener">
+                Contact on WhatsApp
+              </a>
+              <a class="btn btn-outline" href="#pricing">View Pricing</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Customer Feedback</h2>
+            <p>Replace these sample reviews with real customer reviews from WhatsApp or Google reviews for stronger trust.</p>
+          </div>
+        </div>
+
+        <div class="reviews">
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>Very reliable and friendly driver. Pickup was on time and the journey was comfortable. Easy communication through WhatsApp.</p>
+            <div class="who">— Airport Transfer Customer</div>
+          </article>
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>We traveled to Ella and had a smooth trip. Safe driving, fair pricing, and helpful service throughout the day.</p>
+            <div class="who">— Tourist Trip Customer</div>
+          </article>
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>Professional service and quick responses. Great option for private hire and long-distance travel in Sri Lanka.</p>
+            <div class="who">— Private Hire Customer</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="padding-top:3.6rem;">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Book Your Ride Today</h2>
+            <p>Send your route details on WhatsApp for a quick quote and availability confirmation.</p>
+          </div>
+        </div>
+
+        <div class="contact-wrap">
+          <div class="contact-card">
+            <h3 style="margin:.2rem 0 .3rem;">Contact Details</h3>
+            <p style="margin:0;color:#64748b;">
+              Available for airport pickups, private hires, and tourist transport across Sri Lanka.
+            </p>
+
+            <div class="contact-list">
+              <div class="contact-row">
+                <div class="dot">WA</div>
+                <div>
+                  <strong>WhatsApp</strong>
+                  <span><a href="https://wa.me/94768568033" target="_blank" rel="noopener">+94 76 856 8033</a></span>
+                </div>
+              </div>
+
+              <div class="contact-row">
+                <div class="dot">☎</div>
+                <div>
+                  <strong>Phone</strong>
+                  <span><a href="tel:+94768568033">076 856 80 33</a></span>
+                </div>
+              </div>
+
+              <div class="contact-row">
+                <div class="dot">💸</div>
+                <div>
+                  <strong>Pricing</strong>
+                  <span>From LKR 100 per km (route-based final quote)</span>
+                </div>
+              </div>
+
+              <div class="contact-row">
+                <div class="dot">📍</div>
+                <div>
+                  <strong>Service Area</strong>
+                  <span>Colombo • Negombo • Kandy • Ella • Sigiriya • Galle • Islandwide</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:1rem; display:flex; flex-wrap:wrap; gap:.6rem;">
+              <a class="btn btn-primary" href="https://wa.me/94768568033?text=Hello%20Anil%20Wasantha,%20I%20would%20like%20to%20book%20a%20ride.%20Please%20share%20availability." target="_blank" rel="noopener">
+                Book on WhatsApp
+              </a>
+              <a class="btn btn-outline" href="tel:+94768568033">Call Now</a>
+            </div>
+
+            <p class="mini-note" style="margin-top:.8rem;">
+              Booking format: Pickup location • Destination • Date & time • Passengers • Luggage / extra stops
+            </p>
+          </div>
+
+          <div class="map-card" aria-label="Sri Lanka travel map">
+            <!-- You can replace this with a specific Google Maps route/location embed later -->
+            <iframe
+              src="https://www.google.com/maps?q=Sri%20Lanka&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Map of Sri Lanka">
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <strong style="color:#fff;">Anil Wasantha Tours & Transfers</strong><br />
+        <span style="font-size:.9rem;">Private Driver Service in Sri Lanka • Airport Pickups • Tourist Trips • From LKR 100/km</span>
+      </div>
+      <div class="foot-links">
+        <a href="#services">Services</a>
+        <a href="#destinations">Destinations</a>
+        <a href="#pricing">Pricing</a>
+        <a href="https://wa.me/94768568033" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="tel:+94768568033">Call</a>
+      </div>
     </div>
   </footer>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
+    function val(id){ return document.getElementById(id)?.value?.trim() || ""; }
+
+    function sendToWhatsApp(){
+      const name = val("name");
+      const pickup = val("pickup");
+      const destination = val("destination");
+      const date = val("date");
+      const time = val("time");
+      const passengers = val("passengers");
+      const tripType = val("tripType");
+      const notes = val("notes");
+
+      const message =
+`Hello Anil Wasantha, I would like a quote.
+
+Name: ${name || "-"}
+Trip Type: ${tripType || "-"}
+Pickup Location: ${pickup || "-"}
+Destination: ${destination || "-"}
+Date: ${date || "-"}
+Time: ${time || "-"}
+Passengers: ${passengers || "-"}
+Extra Details: ${notes || "-"}
+
+Please share price and availability.
+(Starting price noted: From LKR 100/km)`;
+
+      const url = "https://wa.me/94768568033?text=" + encodeURIComponent(message);
+      window.open(url, "_blank", "noopener");
+    }
   </script>
 </body>
 </html>
